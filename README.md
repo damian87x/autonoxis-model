@@ -75,6 +75,7 @@ npm test 2>&1 | python3 scripts/autonoxis.py gate -c "Zero test failures" -p 0.7
 `-t` can only raise the 0.8 gate; lower values are clamped to 0.8. `gate` exits 0 pass, 1 fail, 2 error.
 
 The model was trained on one call shape: one question with id `label`, `state = {"packet": text}`, and the question text in [`references/conductor-questions.json`](references/conductor-questions.json). `conductor` sends exactly that. With `ask`, keep the same shape or accuracy is unknown.
+The decision track uses the conductor contract prompt; on real-world orchestrator packets (v9) accuracy rises from 59% to 67% with no change on v5–v8.
 
 ## Honest limits
 

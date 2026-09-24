@@ -6,6 +6,7 @@
     {
       "name": "autonoxis-model",
       "source": "./",
+      "version": "0.2.0",
       "description": "Local conductor/manager decisions from Polaris 1 (polaris-1), gated at 0.8."
     }
   ]
