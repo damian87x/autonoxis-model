@@ -1,0 +1,26 @@
+{
+  "name": "autonoxis-model",
+  "version": "0.1.0",
+  "description": "Local, free conductor decisions from Polaris 1 (polaris-1), the autonoxis decision model, over the Jev wire format: STOP/ASK/DISPATCH and ACCEPT/VERIFY/REJECT/REOPEN/ESCALATE, gated at confidence 0.8.",
+  "author": {
+    "name": "Damian Borek"
+  },
+  "homepage": "https://github.com/damian87x/autonoxis-model",
+  "repository": "https://github.com/damian87x/autonoxis-model",
+  "license": "MIT",
+  "keywords": [
+    "autonoxis",
+    "nimble",
+    "jev",
+    "conductor",
+    "local-model"
+  ],
+  "userConfig": {
+    "url": {
+      "type": "string",
+      "title": "autonoxis server URL",
+      "description": "Base URL of the autonoxis server (server.py from github.com/damian87x/pi-autonoxis-model). AUTONOXIS_URL overrides it.",
+      "default": "http://127.0.0.1:8765"
+    }
+  }
+}
