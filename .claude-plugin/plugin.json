@@ -1,7 +1,7 @@
 {
   "name": "autonoxis-model",
-  "version": "0.2.0",
-  "description": "Local, free conductor decisions from Polaris 1 (polaris-1), the autonoxis decision model, over the Jev wire format: STOP/ASK/DISPATCH and ACCEPT/VERIFY/REJECT/REOPEN/ESCALATE, gated at confidence 0.8.",
+  "version": "0.3.0",
+  "description": "Local, free conductor decisions from Polaris 2 (polaris-2), the autonoxis decision model, over the Jev wire format: STOP/ASK/DISPATCH and ACCEPT/VERIFY/REJECT/REOPEN/ESCALATE, gated at confidence 0.8.",
   "author": {
     "name": "Damian Borek"
   },

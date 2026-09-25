@@ -1,13 +1,13 @@
 {
   "name": "autonoxis-model",
   "owner": {"name": "Damian Borek"},
-  "metadata": {"description": "Local Polaris 1 (polaris-1) plugin for Claude Code."},
+  "metadata": {"description": "Local Polaris 2 (polaris-2) plugin for Claude Code."},
   "plugins": [
     {
       "name": "autonoxis-model",
       "source": "./",
-      "version": "0.2.0",
-      "description": "Local conductor/manager decisions from Polaris 1 (polaris-1), gated at 0.8."
+      "version": "0.3.0",
+      "description": "Local conductor/manager decisions from Polaris 2 (polaris-2), gated at 0.8."
     }
   ]
 }

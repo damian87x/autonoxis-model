@@ -1,23 +1,23 @@
 ---
 name: autonoxis
-description: Ask Polaris 1 (polaris-1), the local autonoxis decision model, for a conductor STOP/ASK/DISPATCH or manager ACCEPT/VERIFY/REJECT/REOPEN/ESCALATE decision on a lane packet — free, local, act only at confidence >= 0.8. Use when a conductor or manager loop needs its next action from a condensed packet. Not for reasoning, explanations, code generation, or packets unlike the training data.
+description: Ask Polaris 2 (polaris-2), the local autonoxis decision model, for a conductor STOP/ASK/DISPATCH or manager ACCEPT/VERIFY/REJECT/REOPEN/ESCALATE decision on a lane packet — free, local, act only at confidence >= 0.8. Use when a conductor or manager loop needs its next action from a condensed packet. Not for reasoning, explanations, code generation, or packets unlike the training data.
 ---
 
 # autonoxis
 
-Local Jev-wire-format server (`POST /v1/systemone`, `GET /health`, `GET /v1/models`) running Polaris 1 (`polaris-1`), a LoRA adapter on Bespoke-Nimble-9B. No key, no spend. Latency: about 100 ms per decision on a local GPU after warm-up (measured 97–111 ms; first request ~0.5 s).
+Local Jev-wire-format server (`POST /v1/systemone`, `GET /health`, `GET /v1/models`) running Polaris 2 (`polaris-2`), a LoRA adapter on Bespoke-Nimble-9B. No key, no spend. Latency: about 100 ms per decision on a local GPU after warm-up (measured 97–111 ms; first request ~0.5 s).
 
 CLI: `${CLAUDE_PLUGIN_ROOT}/scripts/autonoxis.py` (stdlib only). URL: `$AUTONOXIS_URL`, else plugin option `url`, else `http://127.0.0.1:8765`.
 
 ## Start the server first
 
-The server is `server.py` from [github.com/damian87x/pi-autonoxis-model/tree/main/server](https://github.com/damian87x/pi-autonoxis-model/tree/main/server); its README has the requirements (NVIDIA GPU, ~20 GB for the 9B model in bf16; torch, transformers, peft, huggingface_hub). The adapter is [`damianborek/polaris-1`](https://huggingface.co/damianborek/polaris-1), a LoRA adapter for `bespokelabs/Bespoke-Nimble-9B`:
+The server is `server.py` from [github.com/damian87x/pi-autonoxis-model/tree/main/server](https://github.com/damian87x/pi-autonoxis-model/tree/main/server); its README has the requirements (NVIDIA GPU, ~20 GB for the 9B model in bf16; torch, transformers, peft, huggingface_hub). The adapter is [`damianborek/polaris-2`](https://huggingface.co/damianborek/polaris-2), a LoRA adapter for `bespokelabs/Bespoke-Nimble-9B`:
 
 ```bash
 git clone https://github.com/damian87x/pi-autonoxis-model && cd pi-autonoxis-model
 git clone https://github.com/bespokelabsai/nimble server/nimble
 hf download bespokelabs/Bespoke-Nimble-9B --revision 594dfdcfb6f94e3d0c0db7535180d3c71689169a --local-dir base
-hf download damianborek/polaris-1 --local-dir adapter
+hf download damianborek/polaris-2 --local-dir adapter
 echo '{"model_path": "base", "max_input_tokens": 2048}' > nimble-model.json
 python server/server.py --model-config nimble-model.json --adapter adapter --port 8765
 python3 ${CLAUDE_PLUGIN_ROOT}/scripts/autonoxis.py health     # from another shell; exit 2 = not up
@@ -43,8 +43,8 @@ Exit codes for `conductor`: **0 ACT** (confidence >= 0.8), **3 ESCALATE** (below
 
 ## Honest limits
 
-- v8 measured 59.2 ± 0.9 of 60 on the held-out conductor set — in-distribution only. Packets unlike the training data (other domains, raw transcripts) are not measured.
-- The gate is not a guarantee. On v8 the served adapter makes one confident miss (v8_g27: ACCEPT expected, VERIFY given at 0.998). VERIFY is the conservative direction, but confidence >= 0.8 does not mean correct.
+- Polaris 2 on real orchestrator packets (v9): 72% (Polaris 1: 59%); v5–v8 all correct; confidence not calibrated on real packets. v9 labels are frontier-model labels, not human labels.
+- The gate is not a guarantee. On v9 five misses are unsafe and confident (four VERIFY packets answered ACCEPT, one ASK answered DISPATCH, all at >= 0.99). Treat ACCEPT as "verify first"; confidence >= 0.8 does not mean correct.
 - 2048-token input limit: send the condensed packet, not the transcript.
 - `gate` (noul) is outside the fine-tune; it runs on the base model's generic ability. Treat it as a hint, never the only guard before an irreversible action.
 - `state` is not treated as hostile; injected text can move the answer. Hard vetoes go in code first.
