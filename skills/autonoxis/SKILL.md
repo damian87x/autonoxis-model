@@ -43,7 +43,7 @@ Exit codes for `conductor`: **0 ACT** (confidence >= 0.8), **3 ESCALATE** (below
 
 ## Honest limits
 
-- Polaris 3 on real orchestrator packets (v9): 79.8% (75/94; Polaris 2: 77.7%, Polaris 1: 64.9%); v5–v8 all correct. v9 labels are the majority of three frontier models (Opus 5.5, Grok 4.7, Astra gpt-6-astra) labelling blind, not human labels; the 2 rows with no majority are left out.
+- Polaris 3 (recommended): about the same accuracy as Polaris 2 on real packets (~77%), slightly better confidence gate (v9 seed averages 77.1% vs 76.3%, within seed-to-seed variation; Polaris 1: 64.9%); v5–v8 all correct. v9 labels are the majority of three frontier models (Opus 5.5, Grok 4.7, Astra gpt-6-astra) labelling blind, not human labels; the 2 rows with no majority are left out.
 - The 0.8 gate is only marginally better than Polaris 2 (v9: 91 of 94 kept at 81.3% vs 80.2%). It is not a guarantee: three v9 misses are unsafe and confident (two VERIFY packets answered ACCEPT, one ASK answered DISPATCH, all at >= 0.96). Treat ACCEPT as "verify first"; confidence >= 0.8 does not mean correct.
 - 2048-token input limit: send the condensed packet, not the transcript.
 - `gate` (noul) is outside the fine-tune; it runs on the base model's generic ability. Treat it as a hint, never the only guard before an irreversible action.

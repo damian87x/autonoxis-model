@@ -85,7 +85,7 @@ Polaris 3 (like Polaris 2) was trained with these exact questions for both track
 
 See the [Polaris 3 model card](https://huggingface.co/damianborek/polaris-3) for the full evaluation.
 
-- Polaris 3 on real orchestrator packets (v9): 79.8% (75/94; Polaris 2: 77.7%, Polaris 1: 64.9%); v5–v8 all correct. v9 labels are the majority of three frontier models (Opus 5.5, Grok 4.7, Astra gpt-6-astra) labelling blind, not human labels; the 2 rows with no majority are left out. The untrained Jev contract prompt scores about 74.5%.
+- Polaris 3 (recommended): about the same accuracy as Polaris 2 on real packets (~77%), slightly better confidence gate (v9 seed averages 77.1% vs 76.3%, within seed-to-seed variation; Polaris 1: 64.9%); v5–v8 all correct. v9 labels are the majority of three frontier models (Opus 5.5, Grok 4.7, Astra gpt-6-astra) labelling blind, not human labels; the 2 rows with no majority are left out. The untrained Jev contract prompt scores about 74.5%.
 - The 0.8 gate is only marginally better than Polaris 2: it keeps 91 of 94 v9 packets at 81.3% (Polaris 2: 91 at 80.2%).
 - The 0.8 gate is not a guarantee. Three v9 misses are unsafe (two `VERIFY` packets answered `ACCEPT`, one `ASK` answered `DISPATCH`), all at confidence >= 0.96. Treat `ACCEPT` as "verify first".
 - Input is limited to 2048 tokens. Send a condensed packet, not a transcript.
