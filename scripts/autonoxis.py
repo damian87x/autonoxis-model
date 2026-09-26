@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""autonoxis: CLI for the local autonoxis server running Polaris 2 (polaris-2) (Jev wire format, stdlib only).
+"""autonoxis: CLI for the local autonoxis server running Polaris 3 (polaris-3) (Jev wire format, stdlib only).
 
   autonoxis.py health
   autonoxis.py conductor --track decision|manager (--packet TEXT | --file F | stdin) [--json] [-t 0.8]

@@ -1,5 +1,5 @@
 ---
-description: Local Polaris 2 (polaris-2) — server status, or a conductor/manager decision on a packet
+description: Local Polaris 3 (polaris-3) — server status, or a conductor/manager decision on a packet
 argument-hint: status | decision <packet> | manager <packet>
 allowed-tools: Bash(python3:*)
 ---
